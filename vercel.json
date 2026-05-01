@@ -1,14 +1,15 @@
 {
-  "rewrites": [
+  "redirects": [
     {
-      "source": "/",
+      "source": "/(.*)",
       "has": [
         {
           "type": "host",
           "value": "noshortsvideos.lubiagency.com.br"
         }
       ],
-      "destination": "/noshortsvideos"
+      "destination": "https://lubiagency.com.br/noshortsvideos",
+      "permanent": true
     }
   ]
 }
