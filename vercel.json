@@ -1,0 +1,14 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "noshortsvideos.lubiagency.com.br"
+        }
+      ],
+      "destination": "/noshortsvideos"
+    }
+  ]
+}
