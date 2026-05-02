@@ -1,3 +1,4 @@
+import { MercadoPagoConfig, Payment } from 'mercadopago';
 import { createClient } from '@supabase/supabase-js';
 import crypto from 'crypto';
 
@@ -28,6 +29,9 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 500, statusMessage: 'Credenciais do Mercado Pago não configuradas no servidor.' });
   }
 
+  const client = new MercadoPagoConfig({ accessToken: mpAccessToken });
+  const payment = new Payment(client);
+
   const supabaseUrl = process.env.SUPABASE_URL || '';
   const supabaseKey = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_KEY || '';
   const supabase = createClient(supabaseUrl, supabaseKey);
@@ -35,46 +39,36 @@ export default defineEventHandler(async (event) => {
   try {
     const externalReference = crypto.randomUUID();
 
-    const orderPayload = {
-      type: "online",
-      total_amount: amount.toFixed(2),
-      external_reference: externalReference,
-      processing_mode: "automatic",
-      transactions: {
-        payments: [
-          {
-            amount: amount.toFixed(2),
-            payment_method: {
-              id: "pix",
-              type: "bank_transfer"
-            },
-            expiration_time: "P3Y6M4DT12H30M5S"
-          }
-        ]
+    const paymentResponse = await payment.create({
+      body: {
+        transaction_amount: amount,
+        description: `Doação de ${name} para o NoShortVideos`,
+        payment_method_id: 'pix',
+        external_reference: externalReference,
+        statement_descriptor: 'NOSHORTVIDS', // Aparece na fatura (Recomendação MP)
+        payer: {
+          email: email,
+          first_name: name,
+        },
+        additional_info: {
+          items: [
+            {
+              id: 'donation', // Código do item
+              title: 'Apoio Projeto NoShortVideos', // Nome do item
+              description: `Doação feita por ${name}`, // Descrição
+              category_id: 'donations', // Categoria
+              quantity: 1, // Quantidade
+              unit_price: amount // Preço
+            }
+          ]
+        }
       },
-      payer: {
-        email: email
+      requestOptions: {
+        idempotencyKey: crypto.randomUUID()
       }
-    };
-
-    const idempotencyKey = crypto.randomUUID();
-
-    const response = await $fetch('https://api.mercadopago.com/v1/orders', {
-      method: 'POST',
-      headers: {
-        'accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${mpAccessToken}`,
-        'X-Idempotency-Key': idempotencyKey
-      },
-      body: orderPayload
     });
 
-    // Pega os dados do pagamento da resposta (Pode variar um pouco na documentação do /orders, mas tentamos os caminhos mais comuns)
-    const payment = response?.transactions?.payments?.[0] || response;
-    const paymentId = payment?.id?.toString() || response?.id?.toString();
-    const qrCode = payment?.point_of_interaction?.transaction_data?.qr_code || payment?.qr_code;
-    const qrCodeBase64 = payment?.point_of_interaction?.transaction_data?.qr_code_base64 || payment?.qr_code_base64;
+    const paymentId = paymentResponse.id?.toString();
 
     if (paymentId) {
       // Gravar no banco de forma segura. NOTA: Email NÃO é salvo por privacidade.
@@ -82,17 +76,24 @@ export default defineEventHandler(async (event) => {
         name,
         amount: amount,
         status: 'pending',
-        payment_id: externalReference, // Salvamos o externalReference para linkar depois no webhook
+        payment_id: externalReference, // Salvamos o externalReference para bater com o webhook
       });
     }
 
     return {
-      qr_code_base64: qrCodeBase64,
-      qr_code: qrCode,
+      qr_code_base64: paymentResponse.point_of_interaction?.transaction_data?.qr_code_base64,
+      qr_code: paymentResponse.point_of_interaction?.transaction_data?.qr_code,
       payment_id: externalReference
     };
   } catch (error: any) {
     console.error('MercadoPago Error:', error.data || error);
-    throw createError({ statusCode: 500, statusMessage: 'Erro interno ao gerar PIX via Orders.' });
+    
+    // Tenta extrair a mensagem de erro específica do Mercado Pago
+    const mpErrorMessage = error?.data?.errors?.[0]?.message || error?.data?.message || error?.message || 'Erro interno ao gerar PIX.';
+    
+    throw createError({ 
+      statusCode: error?.response?.status || 500, 
+      statusMessage: mpErrorMessage
+    });
   }
 });
