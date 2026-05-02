@@ -26,7 +26,7 @@ export default defineEventHandler(async (event) => {
     // Isso previne que alguém dispare um webhook falso simulando um pagamento aprovado
     const paymentData = await payment.get({ id: String(id) });
     
-    if (paymentData.status === 'approved') {
+    if (paymentData.status === 'approved' && paymentData.external_reference) {
       // 3. Segurança: Atualiza o banco garantindo que a quantia anotada é exatamente a que o Mercado Pago recebeu
       await supabase
         .from('donations')
@@ -34,7 +34,7 @@ export default defineEventHandler(async (event) => {
           status: 'approved',
           amount: paymentData.transaction_amount // Sobrescreve pelo valor real que caiu na conta
         })
-        .eq('payment_id', String(id));
+        .eq('payment_id', paymentData.external_reference);
     }
 
     return { status: 'success' };

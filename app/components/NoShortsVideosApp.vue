@@ -14,7 +14,6 @@ useHead({
 
 const name = ref('')
 const amount = ref('')
-const cpf = ref('')
 const email = ref('')
 const loading = ref(false)
 const qrCodeBase64 = ref('')
@@ -27,7 +26,7 @@ const setAmount = (val) => {
 }
 
 const generatePix = async () => {
-  if (!name.value || !amount.value || !cpf.value || !email.value) {
+  if (!name.value || !amount.value || !email.value) {
     errorMsg.value = 'Preencha todos os campos obrigatórios.'
     return
   }
@@ -39,7 +38,6 @@ const generatePix = async () => {
       body: { 
         name: name.value, 
         amount: Number(amount.value),
-        cpf: cpf.value,
         email: email.value
       }
     })
@@ -185,12 +183,7 @@ const { data: donations } = await useFetch('/api/donations/list')
                 <div>
                   <label class="block text-sm font-medium text-slate-400 mb-1">E-mail</label>
                   <input v-model="email" type="email" placeholder="seu@email.com" class="w-full bg-white/5 border border-white/10 rounded-lg text-white px-4 py-3 outline-none focus:border-green-400/50 transition-colors">
-                </div>
-
-                <div>
-                  <label class="block text-sm font-medium text-slate-400 mb-1">CPF (Obrigatório para o Pix)</label>
-                  <input v-model="cpf" type="text" placeholder="000.000.000-00" maxlength="14" class="w-full bg-white/5 border border-white/10 rounded-lg text-white px-4 py-3 outline-none focus:border-green-400/50 transition-colors">
-                  <p class="text-xs text-yellow-500/80 mt-1">⚠️ Apenas para gerar o QR Code. O Mercado Pago exige CPF para pagamentos Pix. Seus dados <strong>NÃO</strong> serão salvos no nosso banco de dados.</p>
+                  <p class="text-xs text-yellow-500/80 mt-1">⚠️ Apenas para gerar o pagamento. Seus dados <strong>NÃO</strong> serão salvos no nosso banco.</p>
                 </div>
                 
                 <div>
