@@ -19,7 +19,7 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 400, statusMessage: 'E-mail inválido.' });
   }
 
-  // 2. Segurança: Valor mínimo (Ex: R$ 1,00 para evitar spam de R$ 0,01)
+  // 2. Segurança: Valor mínimo
   if (!amount || isNaN(amount) || amount < 1) {
     throw createError({ statusCode: 400, statusMessage: 'O valor mínimo para doação é R$ 1,00.' });
   }
@@ -39,28 +39,21 @@ export default defineEventHandler(async (event) => {
   try {
     const externalReference = crypto.randomUUID();
 
+    // Separando o nome para evitar erros de validação da API
+    const firstName = name.split(' ')[0];
+    const lastName = name.split(' ').slice(1).join(' ') || 'Doador';
+
+    // Payload enxuto e específico para PIX
     const paymentResponse = await payment.create({
       body: {
         transaction_amount: amount,
         description: `Doação de ${name} para o NoShortVideos`,
         payment_method_id: 'pix',
         external_reference: externalReference,
-        statement_descriptor: 'NOSHORTVIDS', // Aparece na fatura (Recomendação MP)
         payer: {
           email: email,
-          first_name: name,
-        },
-        additional_info: {
-          items: [
-            {
-              id: 'donation', // Código do item
-              title: 'Apoio Projeto NoShortVideos', // Nome do item
-              description: `Doação feita por ${name}`, // Descrição
-              category_id: 'donations', // Categoria
-              quantity: 1, // Quantidade
-              unit_price: amount // Preço
-            }
-          ]
+          first_name: firstName,
+          last_name: lastName
         }
       },
       requestOptions: {
@@ -71,12 +64,12 @@ export default defineEventHandler(async (event) => {
     const paymentId = paymentResponse.id?.toString();
 
     if (paymentId) {
-      // Gravar no banco de forma segura. NOTA: Email NÃO é salvo por privacidade.
+      // Gravar no banco de forma segura.
       await supabase.from('donations').insert({
         name,
         amount: amount,
         status: 'pending',
-        payment_id: externalReference, // Salvamos o externalReference para bater com o webhook
+        payment_id: externalReference,
       });
     }
 
@@ -85,14 +78,15 @@ export default defineEventHandler(async (event) => {
       qr_code: paymentResponse.point_of_interaction?.transaction_data?.qr_code,
       payment_id: externalReference
     };
+
   } catch (error: any) {
-    console.error('MercadoPago Error:', error.data || error);
-    
-    // Tenta extrair a mensagem de erro específica do Mercado Pago
-    const mpErrorMessage = error?.data?.errors?.[0]?.message || error?.data?.message || error?.message || 'Erro interno ao gerar PIX.';
-    
-    throw createError({ 
-      statusCode: error?.response?.status || 500, 
+    console.error('MercadoPago Error:', error);
+
+    // Simplificando o repasse do erro para facilitar o debug se der problema de novo
+    const mpErrorMessage = error?.message || 'Erro interno ao gerar PIX no Mercado Pago.';
+
+    throw createError({
+      statusCode: 500,
       statusMessage: mpErrorMessage
     });
   }
