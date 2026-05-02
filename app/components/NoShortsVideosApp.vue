@@ -14,6 +14,8 @@ useHead({
 
 const name = ref('')
 const amount = ref('')
+const cpf = ref('')
+const email = ref('')
 const loading = ref(false)
 const qrCodeBase64 = ref('')
 const qrCodeText = ref('')
@@ -25,8 +27,8 @@ const setAmount = (val) => {
 }
 
 const generatePix = async () => {
-  if (!name.value || !amount.value) {
-    errorMsg.value = 'Preencha o nome e o valor.'
+  if (!name.value || !amount.value || !cpf.value || !email.value) {
+    errorMsg.value = 'Preencha todos os campos obrigatórios.'
     return
   }
   errorMsg.value = ''
@@ -34,14 +36,19 @@ const generatePix = async () => {
   try {
     const res = await $fetch('/api/pix/create', {
       method: 'POST',
-      body: { name: name.value, amount: Number(amount.value) }
+      body: { 
+        name: name.value, 
+        amount: Number(amount.value),
+        cpf: cpf.value,
+        email: email.value
+      }
     })
     if (res && res.qr_code) {
       qrCodeBase64.value = res.qr_code_base64
       qrCodeText.value = res.qr_code
     }
   } catch (err) {
-    errorMsg.value = 'Erro ao gerar o PIX. Verifique os dados ou tente novamente mais tarde.'
+    errorMsg.value = err?.data?.statusMessage || 'Erro ao gerar o PIX. Verifique os dados.'
     console.error(err)
   } finally {
     loading.value = false
@@ -173,6 +180,17 @@ const { data: donations } = await useFetch('/api/donations/list')
                 <div>
                   <label class="block text-sm font-medium text-slate-400 mb-1">Seu Nome (ou Nickname)</label>
                   <input v-model="name" type="text" placeholder="Como quer aparecer no mural?" class="w-full bg-white/5 border border-white/10 rounded-lg text-white px-4 py-3 outline-none focus:border-green-400/50 transition-colors">
+                </div>
+                
+                <div>
+                  <label class="block text-sm font-medium text-slate-400 mb-1">E-mail</label>
+                  <input v-model="email" type="email" placeholder="seu@email.com" class="w-full bg-white/5 border border-white/10 rounded-lg text-white px-4 py-3 outline-none focus:border-green-400/50 transition-colors">
+                </div>
+
+                <div>
+                  <label class="block text-sm font-medium text-slate-400 mb-1">CPF (Obrigatório para o Pix)</label>
+                  <input v-model="cpf" type="text" placeholder="000.000.000-00" maxlength="14" class="w-full bg-white/5 border border-white/10 rounded-lg text-white px-4 py-3 outline-none focus:border-green-400/50 transition-colors">
+                  <p class="text-xs text-yellow-500/80 mt-1">⚠️ Apenas para gerar o QR Code. O Mercado Pago exige CPF para pagamentos Pix. Seus dados <strong>NÃO</strong> serão salvos no nosso banco de dados.</p>
                 </div>
                 
                 <div>

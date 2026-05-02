@@ -3,14 +3,24 @@ import { createClient } from '@supabase/supabase-js';
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
-  let { name, amount } = body;
+  let { name, amount, cpf, email } = body;
 
   // 1. Segurança: Sanitização básica
   name = name?.trim();
   amount = Number(amount);
+  cpf = cpf?.replace(/\D/g, ''); // Remove não números
+  email = email?.trim();
 
   if (!name || name.length > 50) {
     throw createError({ statusCode: 400, statusMessage: 'Nome inválido ou muito longo (max 50 caracteres).' });
+  }
+
+  if (!cpf || cpf.length !== 11) {
+    throw createError({ statusCode: 400, statusMessage: 'CPF inválido. Deve conter 11 dígitos.' });
+  }
+
+  if (!email || !email.includes('@')) {
+    throw createError({ statusCode: 400, statusMessage: 'E-mail inválido.' });
   }
 
   // 2. Segurança: Valor mínimo (Ex: R$ 1,00 para evitar spam de R$ 0,01)
@@ -38,8 +48,12 @@ export default defineEventHandler(async (event) => {
         description: `Doação de ${name} para o NoShortVideos`,
         payment_method_id: 'pix',
         payer: {
-          email: 'doador@noshortsvideos.com', // Obrigatório no MP
+          email: email,
           first_name: name,
+          identification: {
+            type: 'CPF',
+            number: cpf
+          }
         },
       }
     });
@@ -47,7 +61,7 @@ export default defineEventHandler(async (event) => {
     const paymentId = paymentResponse.id?.toString();
 
     if (paymentId) {
-      // Gravar no banco de forma segura
+      // Gravar no banco de forma segura. NOTA: CPF e Email NÃO são salvos por privacidade.
       await supabase.from('donations').insert({
         name,
         amount: amount,
