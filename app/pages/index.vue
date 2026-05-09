@@ -13,6 +13,40 @@ import {
   ChevronRight
 } from 'lucide-vue-next'
 
+useSeoMeta({
+  title: 'Lucas Oliveira | Full-Stack Developer & Software Engineer Student',
+  ogTitle: 'Lucas Oliveira | Full-Stack Developer',
+  description: 'Portfólio profissional de Lucas Oliveira. Especialista em Nuxt.js, Node.js e integrações com Inteligência Artificial.',
+  ogDescription: 'Explore projetos inovadores e a trajetória profissional de Lucas Oliveira no desenvolvimento Full-Stack.',
+  ogImage: '/icons/icon.png',
+  twitterCard: 'summary_large_image',
+})
+
+useHead({
+  link: [
+    { rel: 'canonical', href: 'https://lucasoliveira.dev' }
+  ],
+  script: [
+    {
+      type: 'application/ld+json',
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Lucas Oliveira",
+        "jobTitle": "Full-Stack Developer",
+        "url": "https://lucasoliveira.dev",
+        "sameAs": [
+          "https://github.com/LucasOliveira09",
+          "https://www.linkedin.com/in/lucas-oliveira09/",
+          "https://www.instagram.com/lucas_oliveira0911"
+        ],
+        "description": "Desenvolvedor Full-Stack e estudante de Engenharia de Software focado em criar soluções eficientes com Nuxt.js e IA.",
+        "knowsAbout": ["Web Development", "Nuxt.js", "Node.js", "Artificial Intelligence", "Software Engineering"]
+      })
+    }
+  ]
+})
+
 const stack = [
   {
     category: 'Linguagens & Backend',
@@ -81,7 +115,10 @@ const projects = [
     <!-- Navigation -->
     <nav class="fixed top-0 w-full z-50 glass">
       <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <span class="font-bold text-xl tracking-tight text-blue-600 dark:text-blue-400">LO.</span>
+        <div class="flex items-center gap-3">
+          <img src="/icons/icon.png" alt="Logotipo Lucas Oliveira - Desenvolvedor Full-Stack" class="h-9 w-9 rounded-xl shadow-sm" />
+          <span class="font-bold text-xl tracking-tight text-blue-600 dark:text-blue-400">LO.</span>
+        </div>
         <div class="hidden md:flex gap-8 text-sm font-medium uppercase tracking-wider text-slate-600 dark:text-slate-400">
           <a href="#sobre" class="hover:text-blue-600 transition-colors">Sobre</a>
           <a href="#experiencia" class="hover:text-blue-600 transition-colors">Experiência</a>
@@ -94,6 +131,9 @@ const projects = [
 
     <!-- Hero Section -->
     <header class="pt-32 pb-20 px-6 max-w-6xl mx-auto flex flex-col items-center text-center">
+      <div class="mb-8">
+        <img src="/icons/icon.png" alt="Foto de Perfil/Logo Lucas Oliveira" class="w-24 h-24 rounded-3xl shadow-2xl mx-auto border-4 border-white dark:border-slate-800" />
+      </div>
       <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold mb-6 dark:bg-blue-900/30 dark:text-blue-300">
         <span class="relative flex h-2 w-2">
           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
@@ -212,22 +252,25 @@ Hoje, minha mentalidade é focada em produtividade e arquitetura eficiente, evit
         </p>
         
         <div class="flex flex-wrap justify-center gap-6 mb-16">
-          <a href="#" class="flex items-center gap-3 px-6 py-3 rounded-xl bg-slate-100 dark:bg-slate-900 hover:bg-blue-600 hover:text-white transition-all group">
+          <a href="https://youtube.com/@CanalLucasOliveira" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 px-6 py-3 rounded-xl bg-slate-100 dark:bg-slate-900 hover:bg-blue-600 hover:text-white transition-all group">
             <Youtube :size="20" />
             <span class="font-semibold">Canal Lucas Oliveira</span>
           </a>
-          <a href="#" class="flex items-center gap-3 px-6 py-3 rounded-xl bg-slate-100 dark:bg-slate-900 hover:bg-pink-600 hover:text-white transition-all group">
+          <a href="https://instagram.com/lucas_oliveira0911" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 px-6 py-3 rounded-xl bg-slate-100 dark:bg-slate-900 hover:bg-pink-600 hover:text-white transition-all group">
             <Instagram :size="20" />
             <span class="font-semibold">@lucas_oliveira0911</span>
           </a>
         </div>
 
         <div class="pt-16 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-6 text-slate-500 text-sm">
-          <p>© 2024 Lucas Oliveira . Desenvolvido com Nuxt. E-mail para contato: lucasleiteoliveira09@gmail.com</p>
+          <div class="flex flex-col items-center md:items-start gap-4">
+            <img src="/icons/icon.png" alt="Logotipo Lucas Oliveira" class="h-10 w-10 rounded-xl" />
+            <p>© 2024 Lucas Oliveira . Desenvolvido com Nuxt. E-mail para contato: lucasleiteoliveira09@gmail.com</p>
+          </div>
           <div class="flex gap-6">
-            <a href="https://github.com/LucasOliveira09" class="hover:text-blue-600"><Github :size="20" /></a>
-            <a href="https://www.linkedin.com/in/lucas-oliveira09/" class="hover:text-blue-600"><Linkedin :size="20" /></a>
-            <a href="mailto:lucasleiteoliveira09@gmail.com" class="hover:text-blue-600"><Mail :size="20" /></a>
+            <a href="https://github.com/LucasOliveira09" target="_blank" rel="noopener noreferrer" class="hover:text-blue-600" aria-label="Github"><Github :size="20" /></a>
+            <a href="https://www.linkedin.com/in/lucas-oliveira09/" target="_blank" rel="noopener noreferrer" class="hover:text-blue-600" aria-label="LinkedIn"><Linkedin :size="20" /></a>
+            <a href="mailto:lucasleiteoliveira09@gmail.com" class="hover:text-blue-600" aria-label="E-mail"><Mail :size="20" /></a>
           </div>
         </div>
       </div>
