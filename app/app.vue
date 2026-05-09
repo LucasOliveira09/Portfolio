@@ -8,7 +8,7 @@ const url = useRequestURL()
 // Essa lógica faz o roteamento nativo! 
 // Se o domínio tiver 'noshortsvideos' ou a url local tiver '/noshortsvideos', renderizamos a extensão.
 const isExtension = computed(() => {
-  return url.hostname.includes('noshortsvideos') || url.pathname.includes('/noshortsvideos')
+  return url.hostname.includes('onfocus') || url.pathname.includes('/noshortsvideos')
 })
 </script>
 
