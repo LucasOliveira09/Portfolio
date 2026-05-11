@@ -4,12 +4,13 @@ import crypto from 'crypto';
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
-  let { name, amount, email } = body;
+  let { name, amount, email, url } = body;
 
   // 1. Segurança: Sanitização básica
   name = name?.trim();
   amount = Number(amount);
   email = email?.trim();
+  url = url?.trim();
 
   if (!name || name.length > 50) {
     throw createError({ statusCode: 400, statusMessage: 'Nome inválido ou muito longo (max 50 caracteres).' });
@@ -70,6 +71,7 @@ export default defineEventHandler(async (event) => {
         amount: amount,
         status: 'pending',
         payment_id: externalReference,
+        url: url || null,
       });
     }
 

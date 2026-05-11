@@ -12,7 +12,7 @@ export default defineEventHandler(async () => {
 
   const { data, error } = await supabase
     .from('donations')
-    .select('id, name, amount, created_at')
+    .select('id, name, amount, created_at, url')
     .eq('status', 'approved')
     .order('created_at', { ascending: false })
     .limit(50);

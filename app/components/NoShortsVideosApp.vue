@@ -15,6 +15,7 @@ useHead({
 const name = ref('')
 const amount = ref('')
 const email = ref('')
+const userUrl = ref('')
 const loading = ref(false)
 const qrCodeBase64 = ref('')
 const qrCodeText = ref('')
@@ -39,7 +40,8 @@ const generatePix = async () => {
       body: { 
         name: name.value, 
         amount: Number(amount.value),
-        email: email.value
+        email: email.value,
+        url: userUrl.value
       }
     })
     if (res && res.qr_code) {
@@ -193,6 +195,11 @@ const { data: donations } = await useFetch('/api/donations/list')
                   <input v-model="amount" type="number" step="0.01" placeholder="Ex: 10.00" class="w-full bg-white/5 border border-white/10 rounded-lg text-white px-4 py-3 outline-none focus:border-indigo-400/50 transition-colors">
                 </div>
                 
+                <div class="md:col-span-2">
+                  <label class="block text-sm font-medium text-slate-400 mb-1">Seu Link (Opcional)</label>
+                  <input v-model="userUrl" type="url" placeholder="https://seu-site.com ou github" class="w-full bg-white/5 border border-white/10 rounded-lg text-white px-4 py-3 outline-none focus:border-indigo-400/50 transition-colors">
+                </div>
+                
                 <button @click="generatePix" :disabled="loading" class="md:col-span-2 mt-2 px-5 py-3 bg-indigo-600 text-white font-bold rounded-lg hover:bg-indigo-700 transition-colors disabled:opacity-50">
                   {{ loading ? 'Gerando...' : 'Gerar Pix' }}
                 </button>
@@ -228,7 +235,15 @@ const { data: donations } = await useFetch('/api/donations/list')
                   <div class="w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center text-white font-bold shadow-lg shadow-indigo-500/20">
                     {{ donation.name.charAt(0).toUpperCase() }}
                   </div>
-                  <p class="font-bold text-white">{{ donation.name }}</p>
+                  <div class="flex flex-col">
+                    <a v-if="donation.url" :href="donation.url.startsWith('http') ? donation.url : 'https://' + donation.url" target="_blank" class="font-bold text-white hover:text-indigo-400 transition-colors flex items-center gap-1">
+                      {{ donation.name }}
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    </a>
+                    <p v-else class="font-bold text-white">{{ donation.name }}</p>
+                  </div>
                 </div>
                 <div class="font-mono text-indigo-400 font-bold">R$ {{ donation.amount.toFixed(2) }}</div>
               </div>
