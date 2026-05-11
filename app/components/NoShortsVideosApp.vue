@@ -76,8 +76,8 @@ const { data: donations } = await useFetch('/api/donations/list')
     <nav class="fixed top-0 left-0 right-0 z-[100] bg-[#020617]/70 backdrop-blur-xl border-b border-white/10">
       <div class="max-w-6xl mx-auto px-6 h-20 flex justify-between items-center">
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center shadow-[0_0_15px_rgba(99,102,241,0.3)]">
-            <span class="text-white font-bold text-xl">O</span>
+          <div class="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center overflow-hidden shadow-[0_0_15px_rgba(99,102,241,0.3)]">
+            <img src="/icons/icon.png" alt="OnFocus Wolf Logo" class="w-full h-full object-cover">
           </div>
           <span class="text-xl font-bold tracking-tight">OnFocus</span>
         </div>
@@ -258,7 +258,9 @@ const { data: donations } = await useFetch('/api/donations/list')
     <footer class="border-t border-white/10 py-10 mt-10 relative z-10">
       <div class="max-w-6xl mx-auto px-6 flex flex-col items-center gap-4 text-center">
         <div class="flex items-center gap-3 font-bold text-xl">
-          <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white text-sm">O</div>
+          <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center overflow-hidden">
+            <img src="/icons/icon.png" alt="OnFocus Wolf Logo" class="w-full h-full object-cover">
+          </div>
           <span>OnFocus</span>
         </div>
         <p class="text-slate-400">Desenvolvido por <a href="https://github.com/LucasOliveira09" target="_blank" class="text-indigo-400 hover:text-indigo-300">LucasOliveira09</a>.</p>
