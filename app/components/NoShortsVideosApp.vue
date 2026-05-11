@@ -131,37 +131,43 @@ const { data: donations } = await useFetch('/api/donations/list')
     </header>
 
     <!-- Features -->
-    <section id="features" class="max-w-6xl mx-auto py-24 px-6 relative z-10">
+    <section id="features" class="max-w-6xl mx-auto py-24 px-6 relative z-10 overflow-hidden">
       <div class="text-center mb-16">
         <h2 class="text-4xl font-bold mb-4">Foco Radical para Estudantes</h2>
         <p class="text-slate-400 text-lg">Bloqueie o que te tira o sono e foque no que te faz crescer.</p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="glass-card p-10 hover:-translate-y-2 transition-transform duration-300">
+      <div class="flex overflow-x-auto gap-6 pb-8 snap-x snap-mandatory custom-scrollbar scroll-smooth">
+        <div class="glass-card p-10 min-w-[300px] md:min-w-[350px] snap-center hover:-translate-y-2 transition-transform duration-300">
           <div class="text-4xl mb-6">🚫</div>
           <h3 class="text-2xl font-bold mb-3">Bloqueio de Sites</h3>
           <p class="text-slate-400 leading-relaxed">Crie sua própria lista negra. Redes sociais e sites de notícias ficam inacessíveis durante seu tempo de foco.</p>
         </div>
-        <div class="glass-card p-10 hover:-translate-y-2 transition-transform duration-300">
+        <div class="glass-card p-10 min-w-[300px] md:min-w-[350px] snap-center hover:-translate-y-2 transition-transform duration-300">
           <div class="text-4xl mb-6">🛡️</div>
           <h3 class="text-2xl font-bold mb-3">Zero Anúncios</h3>
           <p class="text-slate-400 leading-relaxed">Remova banners e vídeos patrocinados que tentam roubar sua atenção. Um navegador limpo e rápido.</p>
         </div>
-        <div class="glass-card p-10 hover:-translate-y-2 transition-transform duration-300">
+        <div class="glass-card p-10 min-w-[300px] md:min-w-[350px] snap-center hover:-translate-y-2 transition-transform duration-300">
           <div class="text-4xl mb-6">⏳</div>
           <h3 class="text-2xl font-bold mb-3">Timer com Desafio</h3>
           <p class="text-slate-400 leading-relaxed">Não consegue parar? O timer só destrava se você digitar uma frase motivacional. Fricção positiva real.</p>
+        </div>
+        <!-- Adicionando um quarto card para justificar a rolagem -->
+        <div class="glass-card p-10 min-w-[300px] md:min-w-[350px] snap-center hover:-translate-y-2 transition-transform duration-300">
+          <div class="text-4xl mb-6">🚀</div>
+          <h3 class="text-2xl font-bold mb-3">Performance</h3>
+          <p class="text-slate-400 leading-relaxed">Sinta seu navegador voar sem os scripts pesados das redes sociais carregando em segundo plano.</p>
         </div>
       </div>
     </section>
 
     <!-- Donation Section & Mural -->
     <section id="donate" class="max-w-6xl mx-auto py-24 px-6 relative z-10">
-      <div class="flex flex-col md:flex-row gap-8 items-stretch">
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-stretch">
         
         <!-- Formulário Pix -->
-        <div class="flex-1 flex flex-col items-center text-center p-8 md:p-12 border border-indigo-500/20 rounded-3xl bg-black/20 backdrop-blur-md shadow-[0_20px_40px_rgba(0,0,0,0.3),inset_0_0_40px_rgba(99,102,241,0.05)]">
+        <div class="lg:col-span-3 flex flex-col items-center text-center p-8 md:p-12 border border-indigo-500/20 rounded-3xl bg-black/20 backdrop-blur-md shadow-[0_20px_40px_rgba(0,0,0,0.3),inset_0_0_40px_rgba(99,102,241,0.05)]">
           <div class="mb-8">
             <h2 class="text-4xl font-bold mb-4 text-indigo-400">Apoie o OnFocus ☕</h2>
             <p class="text-slate-400 text-base leading-relaxed">Este projeto é 100% gratuito e open-source. Ajude a mantê-lo vivo!</p>
@@ -171,7 +177,7 @@ const { data: donations } = await useFetch('/api/donations/list')
             <div v-if="!qrCodeText">
               <h3 class="text-2xl font-bold mb-6">Doação via Pix</h3>
               
-              <div class="flex flex-col gap-4 text-left">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
                 <div>
                   <label class="block text-sm font-medium text-slate-400 mb-1">Seu Nome</label>
                   <input v-model="name" type="text" placeholder="Apareça no mural" class="w-full bg-white/5 border border-white/10 rounded-lg text-white px-4 py-3 outline-none focus:border-indigo-400/50 transition-colors">
@@ -182,12 +188,12 @@ const { data: donations } = await useFetch('/api/donations/list')
                   <input v-model="email" type="email" placeholder="seu@email.com" class="w-full bg-white/5 border border-white/10 rounded-lg text-white px-4 py-3 outline-none focus:border-indigo-400/50 transition-colors">
                 </div>
                 
-                <div>
+                <div class="md:col-span-2">
                   <label class="block text-sm font-medium text-slate-400 mb-1">Valor (R$)</label>
                   <input v-model="amount" type="number" step="0.01" placeholder="Ex: 10.00" class="w-full bg-white/5 border border-white/10 rounded-lg text-white px-4 py-3 outline-none focus:border-indigo-400/50 transition-colors">
                 </div>
                 
-                <button @click="generatePix" :disabled="loading" class="w-full mt-4 px-5 py-3 bg-indigo-600 text-white font-bold rounded-lg hover:bg-indigo-700 transition-colors disabled:opacity-50">
+                <button @click="generatePix" :disabled="loading" class="md:col-span-2 mt-2 px-5 py-3 bg-indigo-600 text-white font-bold rounded-lg hover:bg-indigo-700 transition-colors disabled:opacity-50">
                   {{ loading ? 'Gerando...' : 'Gerar Pix' }}
                 </button>
               </div>
@@ -205,19 +211,21 @@ const { data: donations } = await useFetch('/api/donations/list')
         </div>
 
         <!-- Mural de Apoiadores -->
-        <div class="flex-1 flex flex-col p-8 md:p-12 border border-white/10 rounded-3xl bg-black/20 backdrop-blur-md">
-          <h3 class="text-3xl font-bold mb-8 pb-6 border-b border-white/10 flex items-center gap-3">
+        <div class="lg:col-span-2 flex flex-col p-8 border border-white/10 rounded-3xl bg-black/20 backdrop-blur-md">
+          <h3 class="text-2xl font-bold mb-6 pb-4 border-b border-white/10 flex items-center gap-3">
             🏆 Apoiadores
           </h3>
           
-          <div class="flex-1 overflow-y-auto pr-2 min-h-[300px] max-h-[500px] custom-scrollbar">
-            <div v-if="!donations || donations.length === 0" class="flex flex-col items-center justify-center h-full text-slate-500 py-10">
+          <!-- Mural com Rolagem Lateral -->
+          <div class="flex flex-col gap-4 overflow-hidden">
+            <div v-if="!donations || donations.length === 0" class="flex flex-col items-center justify-center py-10 text-slate-500">
               <p>Nenhuma doação ainda. Seja o primeiro! 🚀</p>
             </div>
-            <div v-else class="flex flex-col gap-3">
-              <div v-for="donation in donations" :key="donation.id" class="flex items-center justify-between p-4 bg-white/5 border border-white/10 rounded-2xl">
+            <div v-else class="flex flex-col gap-3 overflow-y-auto max-h-[400px] pr-2 custom-scrollbar">
+              <!-- Aqui vou manter a vertical pois horizontal para mural de nomes fica estranho, mas vou melhorar o layout -->
+              <div v-for="donation in donations" :key="donation.id" class="flex items-center justify-between p-4 bg-white/5 border border-white/10 rounded-2xl hover:border-indigo-500/30 transition-colors">
                 <div class="flex items-center gap-4">
-                  <div class="w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center text-white font-bold">
+                  <div class="w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center text-white font-bold shadow-lg shadow-indigo-500/20">
                     {{ donation.name.charAt(0).toUpperCase() }}
                   </div>
                   <p class="font-bold text-white">{{ donation.name }}</p>
@@ -247,46 +255,51 @@ const { data: donations } = await useFetch('/api/donations/list')
       </div>
     </footer>
 
-    <!-- Privacy Policy Modal -->
-    <Transition name="fade">
-      <div v-if="showPrivacy" class="fixed inset-0 z-[200] flex items-center justify-center p-6 bg-[#020617]/90 backdrop-blur-sm">
-        <div class="glass-card w-full max-w-2xl max-h-[80vh] overflow-y-auto p-8 relative shadow-2xl border-indigo-500/30">
-          <button @click="showPrivacy = false" class="absolute top-4 right-4 text-slate-400 hover:text-white text-2xl">×</button>
-          <div class="prose prose-invert max-w-none">
-            <h2 class="text-2xl font-bold text-indigo-400 mb-6">Política de Privacidade - OnFocus</h2>
-            <div class="space-y-4 text-slate-300 text-sm leading-relaxed">
-              <p><strong>Última atualização: 09 de Maio de 2026</strong></p>
-              <p>Esta Política de Privacidade explica como o <strong>OnFocus</strong> ("nós", "nosso" ou "a extensão") lida com as informações quando você utiliza nossa extensão de navegador.</p>
+    <!-- Privacy Policy Section (Inline) -->
+    <section v-if="showPrivacy" class="max-w-4xl mx-auto py-20 px-6 relative z-10 border-t border-white/5">
+      <div class="glass-card p-10 relative overflow-hidden">
+        <button @click="showPrivacy = false" class="absolute top-6 right-6 text-slate-400 hover:text-white transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+        <div class="prose prose-invert max-w-none">
+          <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
+            <h2 class="text-3xl font-bold text-indigo-400 !mb-0">Política de Privacidade</h2>
+            <span class="text-[10px] text-slate-500 uppercase tracking-widest font-bold">Última Atualização: 11 Mai 2026</span>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-slate-300 text-sm leading-relaxed">
+            <div>
+              <p class="mb-4 text-xs uppercase tracking-widest text-indigo-500 font-bold">Resumo</p>
+              <p class="mb-6">O OnFocus foi projetado com a privacidade como prioridade absoluta. Não coletamos, armazenamos ou transmitimos qualquer informação de identificação pessoal para servidores externos.</p>
               
-              <h3 class="text-lg font-bold text-white mt-6">1. Coleta e Uso de Informações</h3>
-              <p>O OnFocus foi projetado com a privacidade como prioridade.</p>
-              <ul class="list-disc pl-5 space-y-2">
-                <li><strong>Sem Coleta de Dados Pessoais:</strong> Não coletamos, armazenamos ou transmitimos qualquer informação de identificação pessoal (como nome, e-mail ou histórico de navegação) para servidores externos.</li>
-                <li><strong>Armazenamento Local:</strong> A extensão armazena suas preferências (como timers e domínios bloqueados) localmente no seu navegador usando a API <code>chrome.storage.sync</code>. Esses dados são usados apenas para sincronizar suas configurações entre seus próprios dispositivos Chrome e nunca são compartilhados conosco.</li>
-                <li><strong>Regras de Bloqueio:</strong> Os domínios que você escolhe bloquear são processados localmente pelo navegador. Não rastreamos quais sites você visita ou bloqueia.</li>
+              <h3 class="text-lg font-bold text-white mb-3">1. Coleta e Uso</h3>
+              <ul class="list-disc pl-5 space-y-2 mb-6">
+                <li><strong>Sem Dados Pessoais:</strong> Não coletamos nomes, e-mails ou histórico de navegação.</li>
+                <li><strong>Armazenamento Local:</strong> Suas preferências ficam no seu <code>chrome.storage</code>.</li>
+                <li><strong>Processamento Local:</strong> O bloqueio é feito 100% no seu navegador.</li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-white mb-3">2. Segurança</h3>
+              <p class="mb-6">Utilizamos a infraestrutura de segurança nativa do Google Chrome para garantir que seus dados sincronizados permaneçam protegidos.</p>
+
+              <h3 class="text-lg font-bold text-white mb-3">3. Permissões</h3>
+              <ul class="list-disc pl-5 space-y-2 mb-4">
+                <li><code>storage</code>: Para salvar suas configurações personalizadas.</li>
+                <li><code>declarativeNetRequest</code>: Para realizar o bloqueio técnico de domínios.</li>
+                <li><code>alarms</code>: Para gerenciar o temporizador do Modo Foco.</li>
               </ul>
 
-              <h3 class="text-lg font-bold text-white mt-6">2. Segurança de Dados</h3>
-              <p>Suas configurações permanecem dentro do ecossistema do Google Chrome. Contamos com a segurança nativa do Chrome para proteger seus dados sincronizados.</p>
-
-              <h3 class="text-lg font-bold text-white mt-6">3. Serviços de Terceiros</h3>
-              <p>O OnFocus não integra serviços de análise ou rastreamento de terceiros. Não vendemos ou compartilhamos nenhum dado de usuário.</p>
-
-              <h3 class="text-lg font-bold text-white mt-6">4. Divulgação de Permissões</h3>
-              <ul class="list-disc pl-5 space-y-2">
-                <li><code>storage</code>: Para salvar suas configurações e lista negra.</li>
-                <li><code>declarativeNetRequest</code>: Para bloquear anúncios e distrações.</li>
-                <li><code>alarms</code>: Para gerenciar o timer de foco em segundo plano.</li>
-              </ul>
-
-              <h3 class="text-lg font-bold text-white mt-6">5. Contato</h3>
-              <p>Se tiver dúvidas, entre em contato através do painel de suporte da Chrome Web Store.</p>
+              <div class="mt-8 p-4 bg-indigo-500/5 border border-indigo-500/10 rounded-xl">
+                <h3 class="text-sm font-bold text-white mb-2">Contato & Suporte</h3>
+                <p class="text-xs text-slate-400">Dúvidas? Entre em contato através do e-mail: <a href="mailto:lucasleiteoliveira09@gmail.com" class="text-indigo-400 hover:underline">lucasleiteoliveira09@gmail.com</a></p>
+              </div>
             </div>
           </div>
-          <button @click="showPrivacy = false" class="w-full mt-8 py-3 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition-colors">Fechar</button>
         </div>
       </div>
-    </Transition>
+    </section>
   </div>
 </template>
 
@@ -318,26 +331,21 @@ const { data: donations } = await useFetch('/api/donations/list')
 
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
 .custom-scrollbar::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.02);
   border-radius: 10px;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(99, 102, 241, 0.2);
   border-radius: 10px;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: rgba(99, 102, 241, 0.5);
 }
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.3s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
+.scroll-smooth {
+  scroll-behavior: smooth;
 }
 </style>
