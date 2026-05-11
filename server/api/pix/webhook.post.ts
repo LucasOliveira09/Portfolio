@@ -3,10 +3,17 @@ import { MercadoPagoConfig, Payment } from 'mercadopago';
 
 export default defineEventHandler(async (event) => {
   const query = getQuery(event);
-  const type = query.type || query.topic;
-  const id = query['data.id'] || query.id;
+  const body = await readBody(event).catch(() => ({}));
+  
+  console.log('--- Webhook MP Recebido ---');
+  console.log('Query:', query);
+  console.log('Body:', body);
 
-  if (!id || type !== 'payment') {
+  const type = query.type || query.topic || body.type || body.action;
+  const id = query['data.id'] || query.id || body.data?.id || body.id;
+
+  if (!id || (type !== 'payment' && type !== 'payment.updated')) {
+    console.log('Webhook ignorado: ID ausente ou tipo inválido:', { id, type });
     return { status: 'ignored' };
   }
 

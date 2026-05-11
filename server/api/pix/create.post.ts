@@ -44,6 +44,9 @@ export default defineEventHandler(async (event) => {
     const firstName = name.split(' ')[0];
     const lastName = name.split(' ').slice(1).join(' ') || 'Doador';
 
+    const origin = getRequestURL(event).origin;
+    const notificationUrl = `${origin}/api/pix/webhook`;
+
     // Payload enxuto e específico para PIX
     const paymentResponse = await payment.create({
       body: {
@@ -51,6 +54,7 @@ export default defineEventHandler(async (event) => {
         description: `Doação de ${name} para o NoShortVideos`,
         payment_method_id: 'pix',
         external_reference: externalReference,
+        notification_url: notificationUrl,
         payer: {
           email: email,
           first_name: firstName,
