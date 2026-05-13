@@ -103,7 +103,7 @@ const { data: donations } = await useFetch('/api/donations/list')
           O OnFocus não apenas oculta Shorts e Reels, ele cria um ambiente blindado para sua produtividade com bloqueio de sites e anúncios.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 mt-4">
-          <a href="https://github.com/LucasOliveira09/NoShortVideos" target="_blank" class="inline-flex items-center justify-center px-7 py-3.5 bg-indigo-600 text-white font-bold rounded-xl shadow-[0_4px_20px_rgba(99,102,241,0.4)] hover:bg-indigo-700 hover:-translate-y-0.5 transition-all">
+          <a href="https://chromewebstore.google.com/detail/iilpohelamhbfjimffmihmhlcdnbkfcl?utm_source=item-share-cb" target="_blank" class="inline-flex items-center justify-center px-7 py-3.5 bg-indigo-600 text-white font-bold rounded-xl shadow-[0_4px_20px_rgba(99,102,241,0.4)] hover:bg-indigo-700 hover:-translate-y-0.5 transition-all">
             Instalar OnFocus
           </a>
           <a href="#features" class="inline-flex items-center justify-center px-7 py-3.5 bg-white/5 border border-white/10 text-white font-semibold rounded-xl hover:bg-white/10 hover:-translate-y-0.5 transition-all">
