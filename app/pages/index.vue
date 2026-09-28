@@ -18,10 +18,10 @@ import {
 const currentYear = new Date().getFullYear()
 
 useSeoMeta({
-  title: 'Lucas Oliveira | Software Engineer & Full-Stack Developer',
-  ogTitle: 'Lucas Oliveira | Software Engineer & Full-Stack Developer',
-  description: 'Portfólio de Lucas Oliveira, desenvolvedor full stack aberto a novas oportunidades em backend, APIs e Engenharia de Software.',
-  ogDescription: 'Experiência, competências e projetos de Lucas Oliveira em Engenharia de Software.',
+  title: 'Lucas Oliveira | Software Engineer & Product Builder',
+  ogTitle: 'Lucas Oliveira | Software Engineer & Product Builder',
+  description: 'Portfólio de Lucas Oliveira — Software Engineer & Product Builder especializado em arquitetura backend, APIs escaláveis e produtos digitais.',
+  ogDescription: 'Engenharia de software, sistemas em produção e produtos digitais construídos por Lucas Oliveira.',
   ogImage: '/banner-lucas.png',
   twitterCard: 'summary_large_image',
 })
@@ -35,7 +35,7 @@ useHead({
         '@context': 'https://schema.org',
         '@type': 'Person',
         name: 'Lucas Oliveira',
-        jobTitle: 'Software Engineer & Full-Stack Developer',
+        jobTitle: 'Software Engineer & Product Builder',
         url: 'https://lubiagency.com.br/',
         sameAs: [
           'https://github.com/LucasOliveira09',
@@ -170,11 +170,10 @@ const projects = [
       <header id="inicio" class="hero-shell">
         <div class="hero-overlay" aria-hidden="true"></div>
         <div class="site-container hero-content">
-          <p class="hero-kicker">Desenvolvedor Full Stack · Aberto a oportunidades</p>
+          <p class="hero-kicker">Software Engineer & Product Builder</p>
           <h1>Lucas Oliveira</h1>
           <p class="hero-summary">
-            Tenho experiência profissional com APIs, aplicações web e produtos digitais.
-            Busco uma nova oportunidade para contribuir em uma equipe de engenharia, evoluir tecnicamente e entregar software confiável.
+            Construo sistemas robustos, arquiteturas escaláveis e produtos digitais que resolvem problemas reais. Foco absoluto em código limpo, execução ágil e geração de valor prático através de software.
           </p>
 
           <div class="hero-actions">
@@ -191,15 +190,15 @@ const projects = [
           <dl class="hero-facts">
             <div>
               <dt><BriefcaseBusiness :size="17" aria-hidden="true" /> Atuação</dt>
-              <dd>TadsBR</dd>
+              <dd>TadsBR Softwares & Projetos</dd>
             </div>
             <div>
               <dt><GraduationCap :size="17" aria-hidden="true" /> Formação</dt>
               <dd>Engenharia de Software · UNIFIO</dd>
             </div>
             <div>
-              <dt><Target :size="17" aria-hidden="true" /> Objetivo</dt>
-              <dd>Desenvolvedor de Software Júnior</dd>
+              <dt><Target :size="17" aria-hidden="true" /> Foco</dt>
+              <dd>Backend, APIs & Alta Performance</dd>
             </div>
           </dl>
         </div>
@@ -209,19 +208,25 @@ const projects = [
         <div class="site-container about-grid">
           <div>
             <p class="section-label">01 · Sobre</p>
-            <h2>Pronto para o próximo desafio.</h2>
+            <h2>Execução real supera teoria. Software feito para gerar valor prático.</h2>
           </div>
           <div class="about-copy">
             <p>
-              Sou estudante de Engenharia de Software na UNIFIO e Estagiário Full Stack na TadsBR. Já atuo em projetos reais, colaborando com desenvolvimento de APIs, interfaces web, regras de negócio, testes e homologação.
+              Sou Software Engineer e Product Builder. Minha abordagem técnica é forjada no mundo real: não acredito em código de gaveta, promessas vazias ou teoria sem aplicação concreta. Acredito em <strong>autenticidade radical</strong>, transparência e em colocar sistemas confiáveis para rodar e sustentar operações de verdade.
             </p>
             <p>
-              Busco uma oportunidade como Desenvolvedor de Software Júnior para ampliar essa experiência, contribuir com uma equipe de engenharia e continuar evoluindo em backend, arquitetura e desenvolvimento full stack.
+              No dia a dia, uno a fundamentação da Engenharia de Software (UNIFIO) com a vivência de mercado na TadsBR Softwares, projetando APIs REST críticas, interfaces reativas e regras de negócio com C#, Java e microsserviços. Em paralelo, sou cofundador e desenvolvedor de plataformas SaaS com centenas de usuários ativos — do backend de alta performance em Java 21 (Virtual Threads) à arquitetura em nuvem e automações inteligentes.
             </p>
-            <div class="about-principles" aria-label="Princípios de trabalho">
-              <span>APIs e backend</span>
-              <span>Trabalho em equipe</span>
-              <span>Qualidade de código</span>
+            <p>
+              Minha mentalidade é guiada por <strong>autonomia, alavancagem por software e foco em soluções reais</strong>: resolver o problema certo, com arquitetura limpa, código manutenível e excelência técnica do commit ao deploy.
+            </p>
+            <div class="about-principles" aria-label="Princípios e valores">
+              <span>Execução > Teoria</span>
+              <span>Autenticidade Radical</span>
+              <span>Sistemas em Produção</span>
+              <span>Java 21 & Spring Boot</span>
+              <span>Arquitetura Limpa & Resiliente</span>
+              <span>Alavancagem por Software</span>
             </div>
           </div>
         </div>
@@ -319,12 +324,12 @@ const projects = [
         <div class="site-container contact-inner">
           <div>
             <p class="section-label">05 · Contato</p>
-            <h2>Estou aberto a novas oportunidades em desenvolvimento de software.</h2>
+            <h2>Tem um desafio técnico ou projeto relevante? Vamos conversar.</h2>
           </div>
           <div class="contact-actions">
             <a href="mailto:lucasleiteoliveira09@gmail.com" class="button button-primary">
               <Mail :size="18" aria-hidden="true" />
-              Falar sobre uma oportunidade
+              Entrar em contato
             </a>
             <a href="https://github.com/LucasOliveira09" target="_blank" rel="noopener noreferrer" class="icon-link" aria-label="GitHub de Lucas Oliveira">
               <Github :size="22" aria-hidden="true" />
