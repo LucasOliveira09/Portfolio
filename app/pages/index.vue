@@ -208,24 +208,27 @@ const projects = [
         <div class="site-container about-grid">
           <div>
             <p class="section-label">01 · Sobre</p>
-            <h2>Execução real supera teoria. Software feito para gerar valor prático.</h2>
+            <h2>Quem está por trás do código: raízes reais, disciplina e foco em construir.</h2>
           </div>
           <div class="about-copy">
             <p>
-              Sou Software Engineer e Product Builder. Minha abordagem técnica é forjada no mundo real: não acredito em código de gaveta, promessas vazias ou teoria sem aplicação concreta. Acredito em <strong>autenticidade radical</strong>, transparência e em colocar sistemas confiáveis para rodar e sustentar operações de verdade.
+              Sou o <strong>Lucas Oliveira</strong>: nascido e criado no interior de São Paulo (Fartura), fascinado por tecnologia desde os 10 anos, quando montei meu primeiro computador peça por peça. Cresci com os pés no chão, valorizando o sítio, a vida no campo e a simplicidade, mas com uma curiosidade incessante por computação, sistemas distribuídos e produtos digitais.
             </p>
             <p>
-              No dia a dia, uno a fundamentação da Engenharia de Software (UNIFIO) com a vivência de mercado na TadsBR Softwares, projetando APIs REST críticas, interfaces reativas e regras de negócio com C#, Java e microsserviços. Em paralelo, sou cofundador e desenvolvedor de plataformas SaaS com centenas de usuários ativos — do backend de alta performance em Java 21 (Virtual Threads) à arquitetura em nuvem e automações inteligentes.
+              Trago dos esportes de combate e dos treinos diários a mentalidade de <strong>disciplina, foco e resiliência</strong>: sem desculpas, sem atalhos falsos e zero postura de guru. Meu estilo é transparente e direto — papo reto de amigo com quem construo parcerias sólidas e leais.
             </p>
             <p>
-              Minha mentalidade é guiada por <strong>autonomia, alavancagem por software e foco em soluções reais</strong>: resolver o problema certo, com arquitetura limpa, código manutenível e excelência técnica do commit ao deploy.
+              Essa mesma autenticidade guia minha carreira em Engenharia de Software. Na TadsBR Softwares e na UNIFIO, atuo no desenvolvimento corporativo de ponta a ponta, criando APIs REST de alto volume, interfaces dinâmicas e regras de negócio com C#, Java e microsserviços. Em paralelo, sou cofundador e builder de plataformas SaaS que operam 24/7 com centenas de usuários ativos — explorando alta concorrência em Java 21 (Virtual Threads), automações em nuvem e IA aplicada.
+            </p>
+            <p>
+              Para mim, software nunca foi sobre acumular jargões ou implorar espaço em lugar nenhum: é sobre <strong>resolver problemas de verdade, dominar a técnica com humildade e entregar valor concreto com autonomia</strong>.
             </p>
             <div class="about-principles" aria-label="Princípios e valores">
-              <span>Execução > Teoria</span>
               <span>Autenticidade Radical</span>
-              <span>Sistemas em Produção</span>
-              <span>Java 21 & Spring Boot</span>
-              <span>Arquitetura Limpa & Resiliente</span>
+              <span>Execução > Teoria</span>
+              <span>Papo Reto & Lealdade</span>
+              <span>Disciplina & Resiliência</span>
+              <span>Java 21 & Sistemas Reais</span>
               <span>Alavancagem por Software</span>
             </div>
           </div>
