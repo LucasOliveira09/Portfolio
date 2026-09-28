@@ -173,7 +173,7 @@ const projects = [
           <p class="hero-kicker">Software Engineer & Product Builder</p>
           <h1>Lucas Oliveira</h1>
           <p class="hero-summary">
-            Construo sistemas robustos, arquiteturas escaláveis e produtos digitais que resolvem problemas reais. Foco absoluto em código limpo, execução ágil e geração de valor prático através de software.
+            Desenvolvedor focado em backend, APIs e aplicações web. Trabalho construindo sistemas práticos, código limpo e projetos que rodam de verdade em produção.
           </p>
 
           <div class="hero-actions">
@@ -198,7 +198,7 @@ const projects = [
             </div>
             <div>
               <dt><Target :size="17" aria-hidden="true" /> Foco</dt>
-              <dd>Backend, APIs & Alta Performance</dd>
+              <dd>Backend, APIs & Sistemas Web</dd>
             </div>
           </dl>
         </div>
@@ -208,28 +208,25 @@ const projects = [
         <div class="site-container about-grid">
           <div>
             <p class="section-label">01 · Sobre</p>
-            <h2>Quem está por trás do código: raízes reais, disciplina e foco em construir.</h2>
+            <h2>Um pouco sobre mim.</h2>
           </div>
           <div class="about-copy">
             <p>
-              Sou o <strong>Lucas Oliveira</strong>: nascido e criado no interior de São Paulo (Fartura), fascinado por tecnologia desde os 10 anos, quando montei meu primeiro computador peça por peça. Cresci com os pés no chão, valorizando o sítio, a vida no campo e a simplicidade, mas com uma curiosidade incessante por computação, sistemas distribuídos e produtos digitais.
+              Sou o <strong>Lucas Oliveira</strong>, desenvolvedor de software e estudante de Engenharia de Software na UNIFIO, morando no interior de São Paulo. Gosto de tecnologia desde criança e sempre tive curiosidade em entender como as coisas funcionam por baixo dos panos.
             </p>
             <p>
-              Trago dos esportes de combate e dos treinos diários a mentalidade de <strong>disciplina, foco e resiliência</strong>: sem desculpas, sem atalhos falsos e zero postura de guru. Meu estilo é transparente e direto — papo reto de amigo com quem construo parcerias sólidas e leais.
+              Hoje trabalho na TadsBR Softwares desenvolvendo sistemas corporativos, integrações e APIs REST com Java e C#. Em paralelo, também crio e mantenho projetos próprios e plataformas SaaS, lidando com backend, microsserviços e automações.
             </p>
             <p>
-              Essa mesma autenticidade guia minha carreira em Engenharia de Software. Na TadsBR Softwares e na UNIFIO, atuo no desenvolvimento corporativo de ponta a ponta, criando APIs REST de alto volume, interfaces dinâmicas e regras de negócio com C#, Java e microsserviços. Em paralelo, sou cofundador e builder de plataformas SaaS que operam 24/7 com centenas de usuários ativos — explorando alta concorrência em Java 21 (Virtual Threads), automações em nuvem e IA aplicada.
+              Meu foco é simples: resolver problemas reais com código limpo, arquitetura sólida e sem enrolação. Gosto de papo reto e de ver a solução funcionando na prática.
             </p>
-            <p>
-              Para mim, software nunca foi sobre acumular jargões ou implorar espaço em lugar nenhum: é sobre <strong>resolver problemas de verdade, dominar a técnica com humildade e entregar valor concreto com autonomia</strong>.
-            </p>
-            <div class="about-principles" aria-label="Princípios e valores">
-              <span>Autenticidade Radical</span>
-              <span>Execução > Teoria</span>
-              <span>Papo Reto & Lealdade</span>
-              <span>Disciplina & Resiliência</span>
-              <span>Java 21 & Sistemas Reais</span>
-              <span>Alavancagem por Software</span>
+            <div class="about-principles" aria-label="Tecnologias e foco">
+              <span>Java & Spring Boot</span>
+              <span>C# & .NET</span>
+              <span>APIs REST</span>
+              <span>Nuxt & Vue</span>
+              <span>Bancos de Dados & Docker</span>
+              <span>Sistemas em Produção</span>
             </div>
           </div>
         </div>
